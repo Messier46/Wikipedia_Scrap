@@ -27,20 +27,13 @@ class firstScrap(scrapy.Spider):
             dykOutput = dykOutput.split('\n') # Removes "\n" from all of the elements and returns it to a list
             
 
-            # "In the news" section *Mistake in the jsonl file happening where a break to a new element isn't happening
-            # Old Style
-            # Using .xpath to prevent pulling unwanted info for this section
-            # newsOutput = w3lib.html.remove_tags(str(dialog.xpath('/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/div[2]/div[2]/div[1]/ul').getall()))
-            # newsOutput = ast.literal_eval(newsOutput) # Convert string back to list
-            # newsOutput = newsOutput[0].split('\n',1) # Splits the list from being one big list into smaller elements similar to how it is on the website
-            # newsOutput = [x.replace('\n','') for x in newsOutput] # Removes "\n" from all of the elements
-
-            # New style
+            # "In the news" section 
             newsOutput = dialog.xpath('/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/div[2]/div[2]/div[1]/ul').getall()
             newsOutput = [w3lib.html.remove_tags(newsOutput[x]) for x in range(len(newsOutput))] # Removes all HTML tags from list
             newsOutput = newsOutput[0] # Converts it to a string to allow for '\n' to be removed
             newsOutput = newsOutput.split('\n') # Removes "\n" from all of the elements and returns it to a list
 
+            # "On this day" section
             
 
             
