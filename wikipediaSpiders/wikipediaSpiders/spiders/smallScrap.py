@@ -34,14 +34,16 @@ class firstScrap(scrapy.Spider):
             newsOutput = newsOutput.split('\n') # Removes "\n" from all of the elements and returns it to a list
 
             # "On this day" section
-            
-
+            dayOutput = dialog.xpath('/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/div[2]/div[2]/div[2]/ul').getall()
+            dayOutput = w3lib.html.remove_tags(dayOutput[0])
+            dayOutput = dayOutput.split('\n')
             
             yield {
                 "Today's date": date.today(),
                 "Today's featured article": featuredOutput,
                 "Did you know": dykOutput,
-                "In the news": newsOutput
+                "In the news": newsOutput,
+                "On this day": dayOutput
             }
         
         
